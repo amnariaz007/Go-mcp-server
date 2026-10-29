@@ -1,0 +1,380 @@
+{
+  "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+  "chain": "ethereum",
+  "complete": true,
+  "coverage": [
+    {
+      "complete": true,
+      "items": 4,
+      "pages_fetched": 1,
+      "source": "transactions"
+    },
+    {
+      "complete": true,
+      "items": 2,
+      "pages_fetched": 1,
+      "source": "internal_transactions"
+    },
+    {
+      "complete": true,
+      "items": 6,
+      "pages_fetched": 1,
+      "source": "token_transfers"
+    }
+  ],
+  "direction": "both",
+  "has_more": true,
+  "items": [
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.962314",
+        "raw": "9962314000000000000",
+        "symbol": "Е⁯ΤН⁯"
+      },
+      "asset": {
+        "contract": "0xE71A494D165101D2f3188B21f59d1fA356B1DFAD",
+        "decimals": 18,
+        "name": "Е⁯ΤН⁯",
+        "reputation": "ok",
+        "symbol": "Е⁯ΤН⁯",
+        "type": "erc20"
+      },
+      "block_number": 26298273,
+      "direction": "out",
+      "from": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "initiated_by_wallet": false,
+      "kind": "token_transfer",
+      "log_index": 1020,
+      "method": "0xa9059cbb",
+      "status": "success",
+      "timestamp": "2026-10-29T12:03:23Z",
+      "to": {
+        "address": "0xEC00050D58369300eD3077Bbf752307451a7E079",
+        "is_contract": false
+      },
+      "transfer_confirmed": true,
+      "tx_hash": "0x7747a82b0f860add1359470c87e82a2d18a0a4849b8011d361ab22fd941d72a8"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.962314",
+        "raw": "9962314000000000000",
+        "symbol": "ETH"
+      },
+      "asset": {
+        "contract": "0x37edddDfC6f907b76a96945B4Cdb964F9466F6F7",
+        "decimals": 18,
+        "name": "ETH",
+        "reputation": "ok",
+        "symbol": "ETH",
+        "type": "erc20"
+      },
+      "block_number": 26298245,
+      "direction": "out",
+      "from": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "initiated_by_wallet": false,
+      "kind": "token_transfer",
+      "log_index": 800,
+      "method": "0xa9059cbb",
+      "status": "success",
+      "timestamp": "2026-10-29T11:57:35Z",
+      "to": {
+        "address": "0xEc003b7D7bE284D26e5E1725B780Ab18F5F00079",
+        "is_contract": true
+      },
+      "transfer_confirmed": true,
+      "tx_hash": "0x5dab7d92764b9f2059c7a1526b69d58049620f945370e6e4bb9e80e8b72de664"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.962285",
+        "raw": "9962285000000000000",
+        "symbol": "Е⁯ΤН⁯"
+      },
+      "asset": {
+        "contract": "0xE71A494D165101D2f3188B21f59d1fA356B1DFAD",
+        "decimals": 18,
+        "name": "Е⁯ΤН⁯",
+        "reputation": "ok",
+        "symbol": "Е⁯ΤН⁯",
+        "type": "erc20"
+      },
+      "block_number": 26298134,
+      "direction": "out",
+      "from": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "initiated_by_wallet": false,
+      "kind": "token_transfer",
+      "log_index": 709,
+      "method": "0xa9059cbb",
+      "status": "success",
+      "timestamp": "2026-10-29T11:35:23Z",
+      "to": {
+        "address": "0x55cA5c27b76BfA337Ca08B7c88a5036Ca1199473",
+        "is_contract": false
+      },
+      "transfer_confirmed": true,
+      "tx_hash": "0x54476baabb4d890f72e1f9f40f856c9114752f5cacea0a72d6c3a689cbc65416"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.962285",
+        "raw": "9962285000000000000",
+        "symbol": "ETH"
+      },
+      "asset": {
+        "contract": "0x37edddDfC6f907b76a96945B4Cdb964F9466F6F7",
+        "decimals": 18,
+        "name": "ETH",
+        "reputation": "ok",
+        "symbol": "ETH",
+        "type": "erc20"
+      },
+      "block_number": 26298103,
+      "direction": "out",
+      "from": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "initiated_by_wallet": false,
+      "kind": "token_transfer",
+      "log_index": 964,
+      "method": "0xa9059cbb",
+      "status": "success",
+      "timestamp": "2026-10-29T11:29:11Z",
+      "to": {
+        "address": "0x55cadf8547bBE765d06788c944C21CdcF17d0473",
+        "is_contract": false
+      },
+      "transfer_confirmed": true,
+      "tx_hash": "0x235ab1907b8343a80ca5b2793a230bdbf125ffbe883bda939752210003ce5099"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.962314",
+        "raw": "9962314000000000000",
+        "symbol": "Е⁯ΤН⁯"
+      },
+      "asset": {
+        "contract": "0xE71A494D165101D2f3188B21f59d1fA356B1DFAD",
+        "decimals": 18,
+        "name": "Е⁯ΤН⁯",
+        "reputation": "ok",
+        "symbol": "Е⁯ΤН⁯",
+        "type": "erc20"
+      },
+      "block_number": 26298101,
+      "direction": "out",
+      "from": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "initiated_by_wallet": false,
+      "kind": "token_transfer",
+      "log_index": 874,
+      "method": "0xa9059cbb",
+      "status": "success",
+      "timestamp": "2026-10-29T11:28:47Z",
+      "to": {
+        "address": "0xEC00050D58369300eD3077Bbf752307451a7E079",
+        "is_contract": false
+      },
+      "transfer_confirmed": true,
+      "tx_hash": "0x90fb676f7c25abd1177139dd5b9ca61cc90a1ba3a28273691089146ef4e45431"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.962314",
+        "raw": "9962314000000000000",
+        "symbol": "ETH"
+      },
+      "asset": {
+        "contract": "0x37edddDfC6f907b76a96945B4Cdb964F9466F6F7",
+        "decimals": 18,
+        "name": "ETH",
+        "reputation": "ok",
+        "symbol": "ETH",
+        "type": "erc20"
+      },
+      "block_number": 26298070,
+      "direction": "out",
+      "from": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "initiated_by_wallet": false,
+      "kind": "token_transfer",
+      "log_index": 554,
+      "method": "0xa9059cbb",
+      "status": "success",
+      "timestamp": "2026-10-29T11:22:35Z",
+      "to": {
+        "address": "0xEc003b7D7bE284D26e5E1725B780Ab18F5F00079",
+        "is_contract": true
+      },
+      "transfer_confirmed": true,
+      "tx_hash": "0x885865b6f426867861ea76299605c9e07f51ffec215b256e03ba43688f0dd7f5"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "0",
+        "raw": "0",
+        "symbol": "ETH"
+      },
+      "asset": {
+        "decimals": 18,
+        "name": "Ether",
+        "symbol": "ETH",
+        "type": "native"
+      },
+      "block_number": 26297977,
+      "direction": "in",
+      "from": {
+        "address": "0x55CaAEEaBCf5ca97c1Ce766D0F90Dee190E79473",
+        "is_contract": false
+      },
+      "kind": "contract_call",
+      "status": "success",
+      "timestamp": "2026-10-29T11:03:59Z",
+      "to": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "transfer_confirmed": false,
+      "tx_hash": "0xad6b17a109e0b38bbf2cc0d486e08ef308fec5a31b777955190b9f77d327ca40"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.962285",
+        "raw": "9962285000000000000",
+        "symbol": "ETH"
+      },
+      "asset": {
+        "decimals": 18,
+        "name": "Ether",
+        "symbol": "ETH",
+        "type": "native"
+      },
+      "block_number": 26297954,
+      "direction": "out",
+      "from": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "kind": "native_transfer",
+      "status": "success",
+      "timestamp": "2026-10-29T10:59:23Z",
+      "to": {
+        "address": "0x55ca12EFBe95ce1903874a66B6eAeAD1377E9473",
+        "is_contract": false
+      },
+      "transfer_confirmed": true,
+      "tx_hash": "0xefa65330a4dc526efad193a0aca7bf96e4b4a50e6b8331a7e4bc26208193eca4"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "0",
+        "raw": "0",
+        "symbol": "ETH"
+      },
+      "asset": {
+        "decimals": 18,
+        "name": "Ether",
+        "symbol": "ETH",
+        "type": "native"
+      },
+      "block_number": 26297948,
+      "direction": "in",
+      "from": {
+        "address": "0xeC0032d02F2F05b6eDB068764e9Fa1303F27E079",
+        "is_contract": false
+      },
+      "kind": "contract_call",
+      "status": "success",
+      "timestamp": "2026-10-29T10:58:11Z",
+      "to": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "transfer_confirmed": false,
+      "tx_hash": "0x0e82d1c338e2bdf531549e196b5cde493a39819904323f7e8b38072e984bc2f5"
+    },
+    {
+      "amount": {
+        "decimals": 18,
+        "formatted": "9.96228733507468",
+        "raw": "9962287335074680000",
+        "symbol": "ETH"
+      },
+      "asset": {
+        "decimals": 18,
+        "name": "Ether",
+        "symbol": "ETH",
+        "type": "native"
+      },
+      "block_number": 26297942,
+      "direction": "in",
+      "from": {
+        "address": "0xF5e10380213880111522dd0efD3dbb45b9f62Bcc",
+        "is_contract": true,
+        "labels": [
+          "Chainflip 1 (name)",
+          "Chainflip (generic)",
+          "DEX (generic)",
+          "Vault (name)"
+        ],
+        "name": "Vault"
+      },
+      "kind": "internal_transfer",
+      "method": "call",
+      "status": "success",
+      "timestamp": "2026-10-29T10:56:59Z",
+      "to": {
+        "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+        "is_contract": false
+      },
+      "trace_index": 2,
+      "transfer_confirmed": true,
+      "tx_hash": "0xbea5decdf99a17fad7723c79a022387d05fb544dfaa931c873c5fade46be649f"
+    }
+  ],
+  "limit": 10,
+  "notes": [
+    "Direction is relative to the queried address: in = it received, out = it sent, self = both sides.",
+    "contract_call items are interactions that moved no ETH; only items with transfer_confirmed=true represent value that actually moved.",
+    "A transaction's ETH value and its ERC-20 events are listed separately because they are different assets.",
+    "Failed or pending transactions are shown with transfer_confirmed=false and excluded from the totals.",
+    "Outgoing token events with initiated_by_wallet=false were emitted in transactions the wallet did not sign (approved spender, relayer, or spoofed/address-poisoning tokens) and should not be read as the wallet's own actions."
+  ],
+  "retrieved_at": "2026-10-29T12:27:30.164458Z",
+  "source": "blockscout",
+  "source_url": "https://eth.blockscout.com/api/v2",
+  "summary": {
+    "by_kind": {
+      "contract_call": 2,
+      "internal_transfer": 1,
+      "native_transfer": 1,
+      "token_transfer": 6
+    },
+    "native_in_confirmed_eth": "9.96228733507468",
+    "native_out_confirmed_eth": "9.962285",
+    "unconfirmed": 2
+  }
+}

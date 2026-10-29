@@ -1,0 +1,53 @@
+{
+  "account_type": "eoa",
+  "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+  "balance": {
+    "decimals": 18,
+    "formatted": "0.000003052186582796",
+    "raw": "3052186582796",
+    "symbol": "ETH"
+  },
+  "balance_as_of_block": 26298376,
+  "chain": "ethereum",
+  "complete": true,
+  "coverage": [
+    {
+      "complete": true,
+      "items": 4,
+      "pages_fetched": 1,
+      "source": "transactions"
+    },
+    {
+      "complete": true,
+      "items": 2,
+      "pages_fetched": 1,
+      "source": "internal_transactions"
+    },
+    {
+      "complete": true,
+      "items": 6,
+      "pages_fetched": 1,
+      "source": "token_transfers"
+    }
+  ],
+  "first_observed": {
+    "kind": "internal_transfer",
+    "timestamp": "2026-10-29T10:47:59Z",
+    "tx_hash": "0xbfe54a96d126145167709dc0c6a4e566ebe2b9b2e0adfb77083d6b188bc5f3b4"
+  },
+  "last_observed": {
+    "kind": "token_transfer",
+    "timestamp": "2026-10-29T12:03:23Z",
+    "tx_hash": "0x7747a82b0f860add1359470c87e82a2d18a0a4849b8011d361ab22fd941d72a8"
+  },
+  "limitations": [
+    "Data reflects the configured Blockscout instance's index, which may lag the chain or be incomplete.",
+    "Labels are provider-supplied metadata and do not establish ownership or identity."
+  ],
+  "provider_flagged_scam": false,
+  "retrieved_at": "2026-10-29T12:27:16.878828Z",
+  "source": "blockscout",
+  "source_url": "https://eth.blockscout.com/api/v2",
+  "token_transfer_count": 0,
+  "transaction_count": 0
+}

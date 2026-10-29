@@ -1,0 +1,30 @@
+{
+ "_comment": "SYNTHETIC fixture in Blockscout v2 /addresses/{a}/transactions shape. Exercises failed, pending and contract-creation transactions. Hashes are fabricated and do not exist on-chain.",
+ "items": [
+  {
+   "hash": "0x00000000000000000000000000000000000000000000000000000000000000f1",
+   "block_number": null, "timestamp": null, "status": null, "result": "pending", "method": null,
+   "value": "2000000000000000000",
+   "from": {"hash": "0x1111111111111111111111111111111111111111", "is_contract": false, "metadata": null},
+   "to": {"hash": "0x2222222222222222222222222222222222222222", "is_contract": false, "metadata": null},
+   "created_contract": null
+  },
+  {
+   "hash": "0x00000000000000000000000000000000000000000000000000000000000000f2",
+   "block_number": 20000001, "timestamp": "2024-06-01T12:00:00.000000Z", "status": "error", "result": "Reverted", "method": "transfer",
+   "value": "1000000000000000000",
+   "from": {"hash": "0x1111111111111111111111111111111111111111", "is_contract": false, "metadata": null},
+   "to": {"hash": "0x2222222222222222222222222222222222222222", "is_contract": false, "metadata": null},
+   "created_contract": null
+  },
+  {
+   "hash": "0x00000000000000000000000000000000000000000000000000000000000000f3",
+   "block_number": 20000000, "timestamp": "2024-06-01T11:59:48.000000Z", "status": "ok", "result": "success", "method": null,
+   "value": "0",
+   "from": {"hash": "0x1111111111111111111111111111111111111111", "is_contract": false, "metadata": null},
+   "to": null,
+   "created_contract": {"hash": "0x3333333333333333333333333333333333333333", "is_contract": true, "name": "Example", "metadata": null}
+  }
+ ],
+ "next_page_params": null
+}

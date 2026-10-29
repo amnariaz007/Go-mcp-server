@@ -1,0 +1,134 @@
+{
+  "asset": {
+    "decimals": 18,
+    "name": "Ether",
+    "symbol": "ETH",
+    "type": "native"
+  },
+  "chain": "ethereum",
+  "edges": [
+    {
+      "first_seen": "2026-10-29T10:53:47Z",
+      "from": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+      "hop": 1,
+      "last_seen": "2026-10-29T10:53:47Z",
+      "to": "0xEc008786a6a966F10f0FA01A6511517c4C05e079",
+      "total": {
+        "decimals": 18,
+        "formatted": "9.962314",
+        "raw": "9962314000000000000",
+        "symbol": "ETH"
+      },
+      "transfer_count": 1,
+      "tx_hashes": [
+        "0x1027120f003f6292e98ace9652603215d8a14d215c3026e0cf3bfd985aa4eeca"
+      ]
+    },
+    {
+      "first_seen": "2026-10-29T10:59:23Z",
+      "from": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+      "hop": 1,
+      "last_seen": "2026-10-29T10:59:23Z",
+      "to": "0x55ca12EFBe95ce1903874a66B6eAeAD1377E9473",
+      "total": {
+        "decimals": 18,
+        "formatted": "9.962285",
+        "raw": "9962285000000000000",
+        "symbol": "ETH"
+      },
+      "transfer_count": 1,
+      "tx_hashes": [
+        "0xefa65330a4dc526efad193a0aca7bf96e4b4a50e6b8331a7e4bc26208193eca4"
+      ]
+    },
+    {
+      "first_seen": "2026-10-29T11:00:11Z",
+      "from": "0x55ca12EFBe95ce1903874a66B6eAeAD1377E9473",
+      "hop": 2,
+      "last_seen": "2026-10-29T11:00:11Z",
+      "to": "0x2CfF890f0378a11913B6129B2E97417a2c302680",
+      "total": {
+        "decimals": 18,
+        "formatted": "9.962285",
+        "raw": "9962285000000000000",
+        "symbol": "ETH"
+      },
+      "transfer_count": 1,
+      "tx_hashes": [
+        "0xe6af4b22eb53c12a274020690561bf32bca561de6d5e4821a5e46314d40131c7"
+      ]
+    }
+  ],
+  "flagged_nodes": [],
+  "hops": 2,
+  "limits": {
+    "contracts_expanded": false,
+    "items_per_source_page": 50,
+    "max_api_calls": 120,
+    "max_children_per_node": 10,
+    "max_edges": 500,
+    "max_nodes": 200,
+    "pages_per_source_per_node": 1,
+    "timeout_seconds": 60,
+    "workers": 4
+  },
+  "methodology": [
+    "Graph tracing: each edge aggregates confirmed outgoing transfers of the traced asset from one address to another, each transfer \u003e= min_amount.",
+    "This shows where value was sent, hop by hop. It does not prove that specific coins received earlier were the ones sent later.",
+    "Failed, pending and zero-value transactions are excluded. Self-transfers are skipped.",
+    "Only the most recent page (up to 50 items) of outgoing activity per source is read for each address; older outflows may be missing (history_truncated).",
+    "Contracts (exchanges, routers, mixers) are graph leaves unless contract expansion is enabled, because their outflows belong to many unrelated users.",
+    "Native ETH includes top-level transfers and internal (contract-initiated) transfers."
+  ],
+  "min_amount": {
+    "decimals": 18,
+    "formatted": "0.1",
+    "raw": "100000000000000000",
+    "symbol": "ETH"
+  },
+  "nodes": [
+    {
+      "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+      "expanded": true,
+      "hop": 0
+    },
+    {
+      "address": "0xEc008786a6a966F10f0FA01A6511517c4C05e079",
+      "expanded": false,
+      "hop": 1,
+      "is_contract": true,
+      "name": "Deposit",
+      "stop_reason": "contract_not_expanded"
+    },
+    {
+      "address": "0x55ca12EFBe95ce1903874a66B6eAeAD1377E9473",
+      "expanded": true,
+      "hop": 1,
+      "is_contract": false
+    },
+    {
+      "address": "0x2CfF890f0378a11913B6129B2E97417a2c302680",
+      "expanded": false,
+      "hop": 2,
+      "is_contract": false,
+      "labels": [
+        "NEAR Intents (name)"
+      ],
+      "stop_reason": "max_hops_reached"
+    }
+  ],
+  "partial": false,
+  "retrieved_at": "2026-10-29T12:27:30.169221Z",
+  "source": "blockscout",
+  "source_url": "https://eth.blockscout.com/api/v2",
+  "start": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+  "stats": {
+    "api_calls": 4,
+    "duration_ms": 16145,
+    "nodes_expanded": 2,
+    "self_transfers_skipped": 0,
+    "transfers_below_minimum": 0,
+    "unconfirmed_transfers_skipped": 0
+  },
+  "warnings": []
+}

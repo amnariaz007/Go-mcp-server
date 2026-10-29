@@ -1,0 +1,7 @@
+[
+  {"tool": "get_address_info", "args": {"address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB", "investigation_id": "demo-20261029T122711Z"}},
+  {"tool": "get_transactions", "args": {"address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB", "limit": 10, "direction": "both", "investigation_id": "demo-20261029T122711Z"}},
+  {"tool": "check_sanctions",  "args": {"address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB", "investigation_id": "demo-20261029T122711Z"}},
+  {"tool": "trace_funds",      "args": {"address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB", "hops": 2, "min_amount": "0.1", "investigation_id": "demo-20261029T122711Z"}},
+  {"tool": "risk_report",      "args": {"address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB", "investigation_id": "demo-20261029T122711Z"}}
+]

@@ -1,0 +1,122 @@
+{
+  "activities_reviewed": 12,
+  "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+  "assessment_status": "complete",
+  "chain": "ethereum",
+  "coverage": [
+    {
+      "complete": true,
+      "items": 4,
+      "pages_fetched": 1,
+      "source": "transactions"
+    },
+    {
+      "complete": true,
+      "items": 2,
+      "pages_fetched": 1,
+      "source": "internal_transactions"
+    },
+    {
+      "complete": true,
+      "items": 6,
+      "pages_fetched": 1,
+      "source": "token_transfers"
+    }
+  ],
+  "data_sources": [
+    {
+      "detail": "address profile and activity history (transactions, internal transactions, ERC-20 transfers)",
+      "name": "blockscout (blockchain data)",
+      "retrieved_at": "2026-10-29T12:27:46.318978Z",
+      "url": "https://eth.blockscout.com/api/v2"
+    },
+    {
+      "detail": "publish date 10/28/2026, 19484 entries, 137 EVM address identifiers",
+      "name": "OFAC Specially Designated Nationals (SDN) list",
+      "retrieved_at": "2026-10-29T12:27:13.347481Z",
+      "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.XML"
+    },
+    {
+      "detail": "6 addresses (WALLETSCOPE_MIXER_ADDRESSES)",
+      "name": "WalletScope configured mixer list"
+    }
+  ],
+  "evidence_tx_hashes": [
+    "0xbfe54a96d126145167709dc0c6a4e566ebe2b9b2e0adfb77083d6b188bc5f3b4"
+  ],
+  "findings": [
+    {
+      "confidence": "high: confirmed transfers from a verified mixer contract address",
+      "counterparties": [
+        {
+          "address": "0x910Cbd523D972eb0a6f4cAe4618aD62622b39DbF",
+          "direction": "received_from",
+          "role": "Tornado Cash 10 ETH pool",
+          "tx_count": 1
+        }
+      ],
+      "evidence_time_range": {
+        "first": "2026-10-29T10:47:59Z",
+        "last": "2026-10-29T10:47:59Z"
+      },
+      "evidence_tx_hashes": [
+        "0xbfe54a96d126145167709dc0c6a4e566ebe2b9b2e0adfb77083d6b188bc5f3b4"
+      ],
+      "explanation": "The wallet received funds from configured mixer contract(s) (withdrawals) or appeared in unsigned token events with them, in 1 transaction(s).",
+      "limitations": [
+        "Mixers have legitimate privacy uses; interaction alone is not evidence of wrongdoing.",
+        "Only configured mixer addresses are recognised; other mixers are not detected."
+      ],
+      "max_points": 40,
+      "points": 30,
+      "rule_id": "MIXER_INTERACTION",
+      "severity": "medium",
+      "sources": [
+        "blockscout activity history (https://eth.blockscout.com/api/v2), retrieved 2026-10-29T12:27:46Z",
+        "WalletScope mixer list (WALLETSCOPE_MIXER_ADDRESSES)"
+      ],
+      "title": "Interaction with a configured mixer contract"
+    }
+  ],
+  "generated_at": "2026-10-29T12:27:46.318599Z",
+  "limitations": [
+    "Scores are rule-based indicators requiring analyst review, not probabilities or legal determinations.",
+    "Only the configured rules are evaluated; see docs/risk-model.md for definitions and thresholds.",
+    "Exposure is assessed one hop from the wallet; use trace_funds for multi-hop flows.",
+    "Blockscout index coverage may lag or omit activity."
+  ],
+  "model_version": "walletscope-risk-v1",
+  "reviewed_window": {
+    "first": "2026-10-29T10:47:59Z",
+    "last": "2026-10-29T12:03:23Z"
+  },
+  "risk_band": "moderate",
+  "risk_band_label": "Elevated indicators requiring review",
+  "rule_evaluations": [
+    {
+      "rule_id": "SANCTIONS_DIRECT",
+      "status": "not_triggered"
+    },
+    {
+      "rule_id": "SANCTIONS_ONE_HOP",
+      "status": "not_triggered"
+    },
+    {
+      "rule_id": "MIXER_INTERACTION",
+      "status": "triggered"
+    },
+    {
+      "rule_id": "DEPOSITS_THEN_LARGE_OUTFLOW",
+      "status": "not_triggered"
+    },
+    {
+      "reason": "wallet is new but no native transfer reached the large-transfer threshold",
+      "rule_id": "NEW_WALLET_LARGE_TRANSFER",
+      "status": "not_triggered"
+    }
+  ],
+  "score": 30,
+  "score_is_lower_bound": false,
+  "summary": "Score 30/100: elevated indicators requiring review. Interaction with a configured mixer contract (+30): The wallet received funds from configured mixer contract(s) (withdrawals) or appeared in unsigned token events with them, in 1 transaction(s).",
+  "warnings": []
+}

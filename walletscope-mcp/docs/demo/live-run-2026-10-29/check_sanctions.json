@@ -1,0 +1,17 @@
+{
+  "address": "0x212B8e1f935B779bBa6DD6Ca7c29c30aAa6e37BB",
+  "checked_at": "2026-10-29T12:27:30.168194Z",
+  "dataset": {
+    "entries": 19484,
+    "evm_addresses": 137,
+    "last_attempt": "2026-10-29T12:27:13.347481Z",
+    "last_successful_load": "2026-10-29T12:27:13.347481Z",
+    "name": "OFAC Specially Designated Nationals (SDN) list",
+    "publish_date": "10/28/2026",
+    "source_url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.XML",
+    "stale": false
+  },
+  "disclaimer": "Screening against the loaded public OFAC SDN dataset only (direct address identifiers). Not legal advice or compliance clearance; a no_match does not mean the address is unconnected to a sanctioned person, and entities may control addresses that OFAC has not listed.",
+  "matches": [],
+  "status": "no_match"
+}

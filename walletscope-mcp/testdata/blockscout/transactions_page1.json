@@ -1,0 +1,259 @@
+{
+ "items": [
+  {
+   "priority_fee": "4691200000000",
+   "is_pending_update": false,
+   "result": "success",
+   "hash": "0x384554825f9e7e4834afecb88f67d65e76094884040ecd682fc0a571365f14a6",
+   "max_fee_per_gas": "376984688",
+   "revert_reason": null,
+   "transaction_burnt_fee": "8506522795584",
+   "type": 2,
+   "token_transfers_overflow": null,
+   "confirmations": 160445,
+   "position": 206,
+   "max_priority_fee_per_gas": "100000000",
+   "transaction_tag": null,
+   "created_contract": null,
+   "value": "0",
+   "from": {
+    "hash": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "is_contract": true,
+    "name": null,
+    "ens_domain_name": "vitalik.eth",
+    "is_scam": false,
+    "is_verified": true,
+    "public_tags": [],
+    "proxy_type": "eip7702",
+    "metadata": {
+     "tags": [
+      {
+       "name": "Vitalik Buterin",
+       "slug": "vitalik-buterin",
+       "tagType": "name"
+      },
+      {
+       "name": "Farcaster",
+       "slug": "warpcast-account",
+       "tagType": "classifier"
+      },
+      {
+       "name": "Gitcoin Grantee",
+       "slug": "gitcoin-grantee",
+       "tagType": "generic"
+      }
+     ]
+    }
+   },
+   "gas_used": "46912",
+   "status": "ok",
+   "to": {
+    "hash": "0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63",
+    "is_contract": true,
+    "name": "PublicResolver",
+    "ens_domain_name": "resolver.eth",
+    "is_scam": false,
+    "is_verified": true,
+    "public_tags": [],
+    "proxy_type": null,
+    "metadata": {
+     "tags": [
+      {
+       "name": "ENS: Public Resolver",
+       "slug": "ens-public-resolver",
+       "tagType": "name"
+      },
+      {
+       "name": "ENS",
+       "slug": "ens",
+       "tagType": "protocol"
+      }
+     ]
+    }
+   },
+   "method": "setContenthash",
+   "gas_limit": "59120",
+   "gas_price": "281329357",
+   "fhe_operations_count": 0,
+   "base_fee_per_gas": "181329357",
+   "timestamp": "2026-10-07T03:09:35.000000Z",
+   "nonce": 5968,
+   "historic_exchange_rate": "2573.2309278741104",
+   "transaction_types": [
+    "contract_call"
+   ],
+   "exchange_rate": "2321.97",
+   "block_number": 26137726,
+   "has_error_in_internal_transactions": false
+  },
+  {
+   "priority_fee": "4692400000000",
+   "is_pending_update": false,
+   "result": "success",
+   "hash": "0x2b9976b03496d148714e721177f14723702b7398dc12aaeec1da9cabf3a28a13",
+   "max_fee_per_gas": "259397336",
+   "revert_reason": null,
+   "transaction_burnt_fee": "6030642354792",
+   "type": 2,
+   "token_transfers_overflow": null,
+   "confirmations": 161148,
+   "position": 107,
+   "max_priority_fee_per_gas": "100000000",
+   "transaction_tag": null,
+   "created_contract": null,
+   "value": "0",
+   "from": {
+    "hash": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "is_contract": true,
+    "name": null,
+    "ens_domain_name": "vitalik.eth",
+    "is_scam": false,
+    "is_verified": true,
+    "public_tags": [],
+    "proxy_type": "eip7702",
+    "metadata": {
+     "tags": [
+      {
+       "name": "Vitalik Buterin",
+       "slug": "vitalik-buterin",
+       "tagType": "name"
+      },
+      {
+       "name": "Farcaster",
+       "slug": "warpcast-account",
+       "tagType": "classifier"
+      },
+      {
+       "name": "Gitcoin Grantee",
+       "slug": "gitcoin-grantee",
+       "tagType": "generic"
+      }
+     ]
+    }
+   },
+   "gas_used": "46924",
+   "status": "ok",
+   "to": {
+    "hash": "0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63",
+    "is_contract": true,
+    "name": "PublicResolver",
+    "ens_domain_name": "resolver.eth",
+    "is_scam": false,
+    "is_verified": true,
+    "public_tags": [],
+    "proxy_type": null,
+    "metadata": {
+     "tags": [
+      {
+       "name": "ENS: Public Resolver",
+       "slug": "ens-public-resolver",
+       "tagType": "name"
+      },
+      {
+       "name": "ENS",
+       "slug": "ens",
+       "tagType": "protocol"
+      }
+     ]
+    }
+   },
+   "method": "setContenthash",
+   "gas_limit": "59135",
+   "gas_price": "228519358",
+   "fhe_operations_count": 0,
+   "base_fee_per_gas": "128519358",
+   "timestamp": "2026-10-07T00:48:11.000000Z",
+   "nonce": 5967,
+   "historic_exchange_rate": "2573.2309278741104",
+   "transaction_types": [
+    "contract_call"
+   ],
+   "exchange_rate": "2321.97",
+   "block_number": 26137023,
+   "has_error_in_internal_transactions": false
+  },
+  {
+   "priority_fee": "874339578000",
+   "is_pending_update": false,
+   "result": "success",
+   "hash": "0x74764256bc7d0525e7a56b2b57751d954752495ed0eea2bac9f7b0198a036d91",
+   "max_fee_per_gas": "136547141",
+   "revert_reason": null,
+   "transaction_burnt_fee": "1225476756000",
+   "type": 2,
+   "token_transfers_overflow": null,
+   "confirmations": 186696,
+   "position": 96,
+   "max_priority_fee_per_gas": "41635218",
+   "transaction_tag": null,
+   "created_contract": null,
+   "value": "41534000000000000",
+   "from": {
+    "hash": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "is_contract": true,
+    "name": null,
+    "ens_domain_name": "vitalik.eth",
+    "is_scam": false,
+    "is_verified": true,
+    "public_tags": [],
+    "proxy_type": "eip7702",
+    "metadata": {
+     "tags": [
+      {
+       "name": "Vitalik Buterin",
+       "slug": "vitalik-buterin",
+       "tagType": "name"
+      },
+      {
+       "name": "Farcaster",
+       "slug": "warpcast-account",
+       "tagType": "classifier"
+      },
+      {
+       "name": "Gitcoin Grantee",
+       "slug": "gitcoin-grantee",
+       "tagType": "generic"
+      }
+     ]
+    }
+   },
+   "gas_used": "21000",
+   "status": "ok",
+   "to": {
+    "hash": "0x44032bD442C5719Ad4FFa123f8Ec3D39c840F686",
+    "is_contract": false,
+    "name": null,
+    "ens_domain_name": null,
+    "is_scam": false,
+    "is_verified": false,
+    "public_tags": [],
+    "proxy_type": null,
+    "metadata": null
+   },
+   "method": null,
+   "gas_limit": "21000",
+   "gas_price": "99991254",
+   "fhe_operations_count": 0,
+   "base_fee_per_gas": "58356036",
+   "timestamp": "2026-10-03T11:20:47.000000Z",
+   "nonce": 5966,
+   "historic_exchange_rate": "2686.891434728346",
+   "transaction_types": [
+    "coin_transfer"
+   ],
+   "exchange_rate": "2321.97",
+   "block_number": 26111475,
+   "has_error_in_internal_transactions": false
+  }
+ ],
+ "next_page_params": {
+  "index": 23,
+  "value": "0",
+  "filter": "from",
+  "hash": "0xb7b9a53449d8f1d6f18b4ef96ec18e7c2c4649f66d08d1b8ae54ff6be2d4954c",
+  "inserted_at": "2026-07-15T03:55:05.099073Z",
+  "block_number": 25535494,
+  "fee": "69273017369856",
+  "items_count": 50
+ }
+}

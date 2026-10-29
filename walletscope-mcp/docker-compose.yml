@@ -1,0 +1,16 @@
+# Streamable HTTP deployment. The container binds 0.0.0.0 internally, so a
+# bearer token is required (config validation refuses to start without one).
+# Publish the port on loopback only unless you put TLS + auth in front of it.
+services:
+  walletscope:
+    build: .
+    image: walletscope-mcp:local
+    environment:
+      WALLETSCOPE_HTTP_AUTH_TOKEN: ${WALLETSCOPE_HTTP_AUTH_TOKEN:?set WALLETSCOPE_HTTP_AUTH_TOKEN (>=16 chars)}
+      WALLETSCOPE_LOG_LEVEL: info
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    restart: unless-stopped

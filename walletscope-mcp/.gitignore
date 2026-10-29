@@ -1,0 +1,24 @@
+# build output
+/bin/
+/dist/
+/walletscope
+*.exe
+*.test
+*.out
+coverage.*
+
+# local secrets and env
+.env
+.env.*
+!.env.example
+
+# logs and temp
+*.log
+tmp/
+.DS_Store
+
+# downloaded datasets (fetched at runtime)
+*.SDN.XML
+sdn*.xml
+!testdata/sanctions/sdn_sample.xml
+demo-output/

@@ -1,0 +1,7 @@
+.git
+bin/
+dist/
+*.log
+.env
+.env.*
+docs/media/*.mov

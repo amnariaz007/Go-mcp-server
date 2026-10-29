@@ -1,0 +1,223 @@
+<?xml version="1.0" standalone="yes"?>
+<sdnList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/XML">
+  <publshInformation>
+    <Publish_Date>10/28/2026</Publish_Date>
+    <Record_Count>3</Record_Count>
+  </publshInformation>
+  <!-- Excerpt of the official OFAC SDN.XML (Publish_Date 10/28/2026). Entries 27307 and 43085 are copied verbatim; entry 9999001 is SYNTHETIC for tests. -->
+  <sdnEntry>
+    <uid>27307</uid>
+    <lastName>LAZARUS GROUP</lastName>
+    <sdnType>Entity</sdnType>
+    <programList>
+      <program>DPRK3</program>
+    </programList>
+    <idList>
+      <id>
+        <uid>135306</uid>
+        <idType>Transactions Prohibited For Persons Owned or Controlled By U.S. Financial Institutions:</idType>
+        <idNumber>North Korea Sanctions Regulations section 510.214</idNumber>
+      </id>
+      <id>
+        <uid>150215</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0x098B716B8Aaf21512996dC57EB0615e2383E2f96</idNumber>
+      </id>
+      <id>
+        <uid>150347</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0xa0e1c89Ef1a489c9C7dE96311eD5Ce5D32c20E4B</idNumber>
+      </id>
+      <id>
+        <uid>150348</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0x3Cffd56B47B7b41c56258D9C7731ABaDc360E073</idNumber>
+      </id>
+      <id>
+        <uid>150529</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0x53b6936513e738f44FB50d2b9476730C0Ab3Bfc1</idNumber>
+      </id>
+      <id>
+        <uid>151631</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0x35fB6f6DB4fb05e6A4cE86f2C93691425626d4b1</idNumber>
+      </id>
+      <id>
+        <uid>151632</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0xF7B31119c2682c88d88D455dBb9d5932c65Cf1bE</idNumber>
+      </id>
+      <id>
+        <uid>151633</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0x3e37627dEAA754090fBFbb8bd226c1CE66D255e9</idNumber>
+      </id>
+      <id>
+        <uid>151647</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0x08723392Ed15743cc38513C4925f5e6be5c17243</idNumber>
+      </id>
+      <id>
+        <uid>132507</uid>
+        <idType>Secondary sanctions risk:</idType>
+        <idNumber>North Korea Sanctions Regulations, sections 510.201 and 510.210</idNumber>
+      </id>
+    </idList>
+    <akaList>
+      <aka>
+        <uid>43391</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>HIDDEN COBRA</lastName>
+      </aka>
+      <aka>
+        <uid>43392</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>OFFICE 91</lastName>
+      </aka>
+      <aka>
+        <uid>43393</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>GUARDIANS OF PEACE</lastName>
+      </aka>
+      <aka>
+        <uid>43394</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>THE NEW ROMANTIC CYBER ARMY TEAM</lastName>
+      </aka>
+      <aka>
+        <uid>43397</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>WHOIS HACKING TEAM</lastName>
+      </aka>
+      <aka>
+        <uid>43398</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>RED DOT</lastName>
+      </aka>
+      <aka>
+        <uid>43399</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>TEMP.HERMIT</lastName>
+      </aka>
+      <aka>
+        <uid>43400</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>GROUP 77</lastName>
+      </aka>
+      <aka>
+        <uid>43401</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>ZINC</lastName>
+      </aka>
+      <aka>
+        <uid>43402</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>APT-C-26</lastName>
+      </aka>
+      <aka>
+        <uid>43403</uid>
+        <type>a.k.a.</type>
+        <category>weak</category>
+        <lastName>APPLEWORM</lastName>
+      </aka>
+    </akaList>
+    <addressList>
+      <address>
+        <uid>41656</uid>
+        <address1>Potonggang District</address1>
+        <city>Pyongyang</city>
+        <country>Korea, North</country>
+      </address>
+    </addressList>
+  </sdnEntry>
+  <sdnEntry>
+    <uid>43085</uid>
+    <firstName>John Desmond</firstName>
+    <lastName>HANAFIN</lastName>
+    <sdnType>Individual</sdnType>
+    <remarks>(Linked To: HURIYA PRIVATE FZE LLE)</remarks>
+    <programList>
+      <program>RUSSIA-EO14024</program>
+    </programList>
+    <idList>
+      <id>
+        <uid>32909</uid>
+        <idType>Passport</idType>
+        <idNumber>LT8338945</idNumber>
+        <idCountry>Ireland</idCountry>
+      </id>
+      <id>
+        <uid>162653</uid>
+        <idType>Gender</idType>
+        <idNumber>Male</idNumber>
+      </id>
+      <id>
+        <uid>162654</uid>
+        <idType>Digital Currency Address - USDT</idType>
+        <idNumber>0x38735f03b30FbC022DdD06ABED01F0Ca823C6a94</idNumber>
+      </id>
+      <id>
+        <uid>175514</uid>
+        <idType>Secondary sanctions risk:</idType>
+        <idNumber>See Section 11 of Executive Order 14024.</idNumber>
+      </id>
+    </idList>
+    <addressList>
+      <address>
+        <uid>64269</uid>
+        <country>United Arab Emirates</country>
+      </address>
+    </addressList>
+    <nationalityList>
+      <nationality>
+        <uid>62652</uid>
+        <country>Ireland</country>
+        <mainEntry>true</mainEntry>
+      </nationality>
+    </nationalityList>
+    <dateOfBirthList>
+      <dateOfBirthItem>
+        <uid>62651</uid>
+        <dateOfBirth>10 Jul 1974</dateOfBirth>
+        <mainEntry>true</mainEntry>
+      </dateOfBirthItem>
+    </dateOfBirthList>
+  </sdnEntry>
+  <sdnEntry>
+    <uid>9999001</uid>
+    <lastName>SYNTHETIC TEST ENTITY</lastName>
+    <sdnType>Entity</sdnType>
+    <remarks>SYNTHETIC entry for WalletScope tests only. Not an OFAC record.</remarks>
+    <programList>
+      <program>TEST-PROGRAM</program>
+    </programList>
+    <idList>
+      <id>
+        <uid>9999002</uid>
+        <idType>Digital Currency Address - ETH</idType>
+        <idNumber>0x9999999999999999999999999999999999999999</idNumber>
+      </id>
+      <id>
+        <uid>9999003</uid>
+        <idType>Digital Currency Address - USDT</idType>
+        <idNumber>0x8888888888888888888888888888888888888888</idNumber>
+      </id>
+      <id>
+        <uid>9999004</uid>
+        <idType>Digital Currency Address - XBT</idType>
+        <idNumber>1SyntheticBitcoinAddressForTestsXXXX</idNumber>
+      </id>
+    </idList>
+  </sdnEntry>
+</sdnList>
