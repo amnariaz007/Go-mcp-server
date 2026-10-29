@@ -6,7 +6,7 @@ Status: living document, updated as behaviour changes.
 
 | Item | Verified fact |
 |---|---|
-| Go | go1.27.3 darwin/amd64 (official tarball, `~/sdk/go`) |
+| Go | go1.27.3 darwin/amd64 (official tarball, `~/sdk/go`); module targets `go 1.26.0` (minimum required by `golang.org/x/crypto`) |
 | MCP SDK | `github.com/modelcontextprotocol/go-sdk` v1.8.0. `mcp.AddTool[In,Out]` infers 2020-12 JSON Schema from `json`/`jsonschema` tags, validates input, fills `StructuredContent`. `mcp.StdioTransport{}`, `mcp.NewStreamableHTTPHandler(getServer, *StreamableHTTPOptions)` (localhost DNS-rebinding protection on by default), `mcp.NewInMemoryTransports()`, `mcp.CommandTransport`, `mcp.StreamableClientTransport` for tests. |
 | Blockscout | `https://eth.blockscout.com/api/v2`. Endpoints used: `GET /addresses/{a}`, `GET /addresses/{a}/counters`, `GET /addresses/{a}/transactions?filter=from\|to`, `GET /addresses/{a}/internal-transactions?filter=from\|to`, `GET /addresses/{a}/token-transfers?type=ERC-20&filter=from\|to`. 50 items/page; cursor = `next_page_params` object echoed back as query params; `null` = last page. Invalid address → HTTP 422. Unknown address → 200 with zero balance (so "no data" ≠ "no activity" must be handled by counters). Responses carry `x-ratelimit-limit/remaining/reset`. Amounts are decimal strings in base units. No first-seen field exists. |
 | OFAC | Official SDN XML `https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.XML` (302 → S3, ~29 MB). Addresses are `<id><idType>Digital Currency Address - ETH</idType><idNumber>0x…</idNumber></id>` inside `<sdnEntry>`. 124 ETH ids on 2026-10-28; EVM-format ids also appear under USDT, USDC, ARB, BSC, ETC. |
@@ -42,6 +42,10 @@ Dependency direction: mcpserver → investigation/risk → blockchain/sanctions 
 8. **HTTP security**: bind 127.0.0.1 by default; optional static bearer token; refuse to start on a non-loopback bind without a token unless explicitly overridden.
 9. **No persistent store**; caches are in memory.
 
+10. **Address poisoning** (added after the real Claude Code session): outgoing ERC-20 events in transactions the wallet did not sign are tagged `initiated_by_wallet=false` and scored at the passive tier only.
+11. **Initial OFAC load retries quickly** (2s, 4s, 8s, 16s, 32s) until the first success, then at most every 5 min on failure (added after a live TLS handshake timeout).
+12. **`internal/app`** owns wiring so `main` and integration tests share one construction path.
+
 ## 4. Phases and exit gates
 
 | Phase | Deliverable | Exit gate |
@@ -62,6 +66,19 @@ Dependency direction: mcpserver → investigation/risk → blockchain/sanctions 
 - Hub addresses (exchanges) explode tracing → contract leaves, per-node fan-out cap, global budgets.
 - Heuristic false positives (dusting from mixers to famous wallets) → incoming-only exposure weighted lower, limitations stated in every finding.
 
-## 6. Acceptance criteria
+## 6. Status (2026-10-29)
 
-See the Definition of Done in the README "Verification status" section; every item is evaluated against actual command output.
+| Phase | Status | Evidence |
+|---|---|---|
+| 0 | done | §1 facts verified against live endpoints and SDK source |
+| 1 | done | `mcpcall` (official SDK client) → stdio `ping` tool; later replaced by the five tools |
+| 2 | done | offline fixture tests; live `get_address_info` / `get_transactions` on vitalik.eth |
+| 3 | done | trace tests (cycles, budgets, cancellation, determinism, `-race`); live 2-hop trace |
+| 4 | done | SDN excerpt tests; full official file parsed (19,484 entries, 137 EVM ids); live Lazarus match |
+| 5 | done | rule regressions incl. the 7 required scenarios; live reports (30/100 mixer withdrawal; 100/100 Lazarus) |
+| 6 | done | in-memory, stdio-pipe, compiled-binary stdio and Streamable HTTP integration tests; live HTTP with bearer auth |
+| 7 | done except GIF and push | race/vet/build, live smoke, Docker build + smoke, real Claude Code session |
+
+## 7. Acceptance criteria
+
+The definition-of-done checklist from the build brief, evaluated against actual command output, is in the final delivery report.

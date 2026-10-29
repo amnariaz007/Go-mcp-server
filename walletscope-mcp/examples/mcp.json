@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "walletscope": {
+      "type": "stdio",
+      "command": "/ABSOLUTE/PATH/TO/walletscope-mcp/bin/walletscope",
+      "args": [],
+      "env": {}
+    }
+  }
+}

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WalletScope</title>
+<style>
+:root {
+  --bg: #f6f7f9; --card: #ffffff; --text: #16191d; --muted: #5f6873; --line: #e3e6ea;
+  --accent: #2f5bd3; --accent-ink: #ffffff; --chip: #eef1f5;
+  --sev-critical: #b42318; --sev-high: #d4561b; --sev-medium: #b7791f; --sev-low: #3d7a4b; --ok: #2f7d4f;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1215; --card: #171b20; --text: #e7eaee; --muted: #9aa4af; --line: #2a3038;
+    --accent: #7c9cff; --accent-ink: #0f1215; --chip: #222831;
+    --sev-critical: #ff6b5e; --sev-high: #ff9150; --sev-medium: #e5b45a; --sev-low: #6fc28a; --ok: #6fc28a;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+header { display: flex; align-items: center; gap: 12px; padding: 14px 24px; border-bottom: 1px solid var(--line); background: var(--card); position: sticky; top: 0; z-index: 2; }
+header h1 { font-size: 18px; margin: 0; letter-spacing: .2px; }
+header .tag { color: var(--muted); font-size: 13px; }
+header .spacer { flex: 1; }
+main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; background: var(--chip); font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.dot.ok { background: var(--ok); } .dot.bad { background: var(--sev-critical); } .dot.wait { background: var(--sev-medium); }
+button { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--text); padding: 8px 14px; border-radius: 8px; cursor: pointer; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+button:disabled { opacity: .55; cursor: progress; }
+button.link { border: none; background: none; color: var(--muted); padding: 4px 6px; font-size: 13px; }
+.search { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; }
+.field { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; color: var(--muted); }
+input, select { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+input#addr { font-family: var(--mono); font-size: 14px; width: 100%; }
+.grow { flex: 1; min-width: 260px; }
+.recent { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.recent button { font-family: var(--mono); font-size: 12px; padding: 3px 8px; }
+.steps { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 4px; }
+.step { font-size: 12.5px; padding: 3px 10px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+.step.run { color: var(--sev-medium); } .step.done { color: var(--ok); } .step.err { color: var(--sev-critical); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-top: 16px; }
+.card h2 { font-size: 16px; margin: 0 0 12px; display: flex; align-items: center; gap: 10px; }
+.card h2 .spacer { flex: 1; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.mono { font-family: var(--mono); font-size: 13px; word-break: break-all; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+.score { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+.gauge { width: 112px; height: 112px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.gauge .in { width: 88px; height: 88px; border-radius: 50%; background: var(--card); display: grid; place-items: center; text-align: center; }
+.gauge b { font-size: 30px; line-height: 1; } .gauge span { font-size: 11px; color: var(--muted); }
+.band { font-size: 18px; font-weight: 600; }
+.finding { border: 1px solid var(--line); border-left: 4px solid var(--muted); border-radius: 8px; padding: 12px 14px; margin-top: 10px; }
+.finding.critical { border-left-color: var(--sev-critical); } .finding.high { border-left-color: var(--sev-high); }
+.finding.medium { border-left-color: var(--sev-medium); } .finding.low { border-left-color: var(--sev-low); }
+.finding .top { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.finding .pts { margin-left: auto; font-weight: 700; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.chip { background: var(--chip); border-radius: 6px; padding: 2px 8px; font-size: 12.5px; }
+.chip.warn { color: var(--sev-high); } .chip.bad { color: var(--sev-critical); font-weight: 600; } .chip.good { color: var(--ok); }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+.kv dt { color: var(--muted); font-size: 13px; } .kv dd { margin: 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 500; font-size: 12.5px; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scroll { overflow-x: auto; }
+.hop { margin-top: 12px; }
+.hop h3 { font-size: 13.5px; color: var(--muted); margin: 0 0 6px; font-weight: 600; }
+.edge { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 6px; }
+.edge.flag { border-color: var(--sev-critical); }
+ul.warn { margin: 6px 0 0; padding-left: 18px; color: var(--sev-high); font-size: 13.5px; }
+details.raw { margin-top: 12px; } details.raw summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+details.raw pre { max-height: 360px; overflow: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; font-size: 12px; }
+.error { color: var(--sev-critical); }
+.empty { text-align: center; color: var(--muted); padding: 48px 0; }
+.disclaimer { margin-top: 28px; font-size: 12.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>WalletScope</h1><span class="tag">Ethereum wallet investigation</span>
+  <span class="spacer"></span>
+  <span class="pill" id="status"><span class="dot wait"></span>Checking…</span>
+  <button class="link" id="stop" title="Stop the local WalletScope server">Stop server</button>
+</header>
+<main>
+  <section class="search">
+    <div class="row">
+      <label class="field grow">Wallet address
+        <input id="addr" placeholder="0x…" spellcheck="false" autocomplete="off">
+      </label>
+      <label class="field">Trace hops
+        <select id="hops"><option>1</option><option selected>2</option><option>3</option></select>
+      </label>
+      <label class="field">Min transfer (ETH)
+        <input id="min" value="0.1" size="6">
+      </label>
+      <button class="primary" id="go">Investigate</button>
+    </div>
+    <div class="recent" id="recent"></div>
+  </section>
+
+  <div class="steps" id="steps"></div>
+  <div id="out"><div class="empty">Paste an Ethereum address and press <b>Investigate</b>.<br>
+    WalletScope will profile it, list recent activity, screen it against OFAC, trace outgoing funds and build an explainable risk report.</div></div>
+
+  <p class="disclaimer">Results are investigative indicators from public data (Blockscout, OFAC SDN). A sanctions screening hit is not a legal determination,
+    “no match” is not compliance clearance, and risk scores require analyst review.</p>
+</main>
+
+<script>
+"use strict";
+const $ = (s) => document.querySelector(s);
+let explorer = "https://eth.blockscout.com";
+
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const short = (a) => (a && a.length > 14 ? a.slice(0, 8) + "…" + a.slice(-6) : a || "");
+const txLink = (h) => `<a class="mono" href="${explorer}/tx/${esc(h)}" target="_blank" rel="noopener" title="${esc(h)}">${esc(short(h))}</a>`;
+const addrLink = (a, label) => `<a class="mono" href="${explorer}/address/${esc(a)}" target="_blank" rel="noopener" title="${esc(a)}">${esc(label || short(a))}</a>`;
+const when = (t) => (t ? new Date(t).toISOString().replace("T", " ").slice(0, 16) + " UTC" : "—");
+const amt = (a) => (a ? `${esc(a.formatted || a.raw)} ${esc(a.symbol || "")}` : "—");
+const raw = (obj) => `<details class="raw"><summary>Raw JSON</summary><pre>${esc(JSON.stringify(obj, null, 2))}</pre></details>`;
+
+async function call(tool, args) {
+  const r = await fetch("/api/call", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ tool, args }) });
+  const body = await r.json().catch(() => ({ error: "invalid response" }));
+  if (!r.ok) throw new Error(body.error || r.statusText);
+  return body.result;
+}
+
+async function refreshStatus() {
+  try {
+    const s = await (await fetch("/api/status")).json();
+    if (s.provider) explorer = s.provider.replace(/\/api\/v2\/?$/, "");
+    const el = $("#status");
+    if (s.sanctions_loaded) el.innerHTML = `<span class="dot ok"></span>OFAC SDN loaded (${esc(s.sanctions_publish_date)})`;
+    else if (s.sanctions_error) el.innerHTML = `<span class="dot bad"></span>OFAC unavailable – retrying`;
+    else el.innerHTML = `<span class="dot wait"></span>Loading OFAC list…`;
+    if (!s.sanctions_loaded) setTimeout(refreshStatus, 3000);
+  } catch { $("#status").innerHTML = `<span class="dot bad"></span>Server stopped`; }
+}
+
+// ---- recent searches (per browser, convenience only) ----
+function recent() { try { return JSON.parse(localStorage.getItem("ws.recent") || "[]"); } catch { return []; } }
+function remember(a) {
+  try { localStorage.setItem("ws.recent", JSON.stringify([a, ...recent().filter((x) => x.toLowerCase() !== a.toLowerCase())].slice(0, 6))); } catch {}
+  drawRecent();
+}
+function drawRecent() {
+  const list = recent();
+  $("#recent").innerHTML = list.length ? `<span class="muted small">Recent:</span>` + list.map((a) => `<button data-a="${esc(a)}">${esc(short(a))}</button>`).join("") : "";
+  $("#recent").querySelectorAll("button").forEach((b) => (b.onclick = () => { $("#addr").value = b.dataset.a; investigate(); }));
+}
+
+// ---- renderers ----
+const bandColor = { severe: "var(--sev-critical)", high: "var(--sev-high)", moderate: "var(--sev-medium)", low: "var(--sev-low)" };
+
+function renderRisk(r) {
+  const color = bandColor[r.risk_band] || "var(--muted)";
+  const pct = Math.max(0, Math.min(100, r.score));
+  const findings = (r.findings || []).map((f) => `
+    <div class="finding ${esc(f.severity)}">
+      <div class="top"><b>${esc(f.title)}</b><span class="chip">${esc(f.rule_id)}</span><span class="chip">${esc(f.severity)}</span>
+        <span class="pts">+${f.points}${f.suppressed_reason ? " (overlap)" : ""}</span></div>
+      <div>${esc(f.explanation)}</div>
+      ${f.suppressed_reason ? `<div class="small muted">${esc(f.suppressed_reason)}</div>` : ""}
+      ${(f.counterparties || []).length ? `<div class="small" style="margin-top:6px">Counterparties: ${f.counterparties.map((c) => `${addrLink(c.address)} <span class="muted">(${esc(c.role)}, ${esc(c.direction)})</span>`).join(" · ")}</div>` : ""}
+      ${(f.evidence_tx_hashes || []).length ? `<div class="small" style="margin-top:4px">Evidence: ${f.evidence_tx_hashes.map(txLink).join(" ")}${f.evidence_truncated ? " …" : ""}</div>` : ""}
+      ${(f.sanctions_records || []).map((s) => `<div class="small" style="margin-top:4px">SDN: <b>${esc(s.name)}</b> (uid ${esc(s.uid)}, ${esc((s.programs || []).join(", "))})</div>`).join("")}
+      <div class="small muted" style="margin-top:4px">Confidence: ${esc(f.confidence)}</div>
+      <div class="small muted">Limitations: ${esc((f.limitations || []).join(" "))}</div>
+    </div>`).join("");
+  const evals = (r.rule_evaluations || []).map((e) => {
+    const cls = e.status === "triggered" ? "bad" : e.status === "not_evaluated" ? "warn" : "good";
+    return `<tr><td class="mono">${esc(e.rule_id)}</td><td><span class="chip ${cls}">${esc(e.status.replace("_", " "))}</span></td><td class="muted small">${esc(e.reason || "")}</td></tr>`;
+  }).join("");
+  return `<section class="card"><h2>Risk report <span class="spacer"></span><span class="pill">${esc(r.model_version)}</span></h2>
+    <div class="score">
+      <div class="gauge" style="background: conic-gradient(${color} ${pct * 3.6}deg, var(--line) 0)"><div class="in"><div><b>${r.score}</b><br><span>/ 100${r.score_is_lower_bound ? " · min" : ""}</span></div></div></div>
+      <div style="flex:1;min-width:240px">
+        <div class="band" style="color:${color}">${esc(r.risk_band_label)}</div>
+        <div class="chips"><span class="chip ${r.assessment_status === "complete" ? "good" : "warn"}">assessment: ${esc(r.assessment_status)}</span>
+          ${r.score_is_lower_bound ? `<span class="chip warn">score is a lower bound</span>` : ""}
+          <span class="chip">${r.activities_reviewed} activities reviewed</span>
+          ${r.reviewed_window ? `<span class="chip">${when(r.reviewed_window.first)} → ${when(r.reviewed_window.last)}</span>` : ""}</div>
+        <p style="margin:10px 0 0">${esc(r.summary)}</p>
+      </div>
+    </div>
+    ${findings || `<p class="muted">No rule was triggered.</p>`}
+    <h3 class="small muted" style="margin:16px 0 4px">Every rule</h3>
+    <div class="scroll"><table><tbody>${evals}</tbody></table></div>
+    ${(r.warnings || []).length ? `<ul class="warn">${r.warnings.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}
+    ${raw(r)}</section>`;
+}
+
+function renderSanctions(s) {
+  const badge = s.status === "match" ? `<span class="chip bad">MATCH</span>` : s.status === "no_match" ? `<span class="chip good">no match</span>` : `<span class="chip warn">inconclusive</span>`;
+  const matches = (s.matches || []).map((m) => `<div class="finding critical"><b>${esc(m.name)}</b> <span class="chip">${esc(m.type)}</span>
+      <div class="small">SDN uid ${esc(m.uid)} · programs ${esc((m.programs || []).join(", "))} · listed as ${esc(m.id_type)}</div>
+      ${(m.aliases || []).length ? `<div class="small muted">a.k.a. ${esc(m.aliases.join(", "))}</div>` : ""}</div>`).join("");
+  const d = s.dataset || {};
+  return `<section class="card"><h2>Sanctions screening ${badge}</h2>
+    ${s.reason ? `<p class="error">${esc(s.reason)}</p>` : ""}${matches}
+    <p class="small muted">${esc(d.name)} · published ${esc(d.publish_date || "—")} · ${d.evm_addresses ?? "?"} EVM identifiers · loaded ${when(d.last_successful_load)}${d.stale ? " · <b>stale</b>" : ""}</p>
+    <p class="small muted">${esc(s.disclaimer)}</p>${raw(s)}</section>`;
+}
+
+function renderProfile(p) {
+  const rows = [
+    ["Address", addrLink(p.address, p.address)],
+    ["Account type", esc(p.account_type)],
+    ["ETH balance", p.balance ? amt(p.balance) : `<span class="muted">unknown</span>`],
+    ["ENS", esc(p.ens || "—")],
+    ["Labels", (p.labels || []).length ? p.labels.map((l) => `<span class="chip">${esc(l)}</span>`).join(" ") : "—"],
+    ["Transactions", p.transaction_count ?? "—"],
+    ["Token transfers", p.token_transfer_count ?? "—"],
+    ["First activity", p.first_observed ? `${when(p.first_observed.timestamp)} · ${txLink(p.first_observed.tx_hash)}` : `<span class="muted">not determined</span>`],
+    ["Last activity", p.last_observed ? `${when(p.last_observed.timestamp)} · ${txLink(p.last_observed.tx_hash)}` : "—"],
+  ];
+  if (p.provider_flagged_scam) rows.push(["Provider flag", `<span class="chip bad">flagged as scam</span>`]);
+  return `<section class="card"><h2>Address profile ${p.complete ? "" : `<span class="chip warn">partial</span>`}</h2>
+    <dl class="kv">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+    <ul class="warn">${(p.limitations || []).slice(2).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>${raw(p)}</section>`;
+}
+
+function renderTrace(t) {
+  const nodes = Object.fromEntries((t.nodes || []).map((n) => [n.address, n]));
+  const label = (a) => { const n = nodes[a] || {}; return n.ens || n.name || (n.labels || [])[0] || ""; };
+  const byHop = {};
+  (t.edges || []).forEach((e) => (byHop[e.hop] = byHop[e.hop] || []).push(e));
+  const hops = Object.keys(byHop).sort().map((h) => `<div class="hop"><h3>Hop ${h}</h3>${byHop[h].map((e) => {
+    const flags = (nodes[e.to] || {}).flags || [];
+    const stop = (nodes[e.to] || {}).stop_reason;
+    return `<div class="edge ${flags.length ? "flag" : ""}">
+      <div>${addrLink(e.from)} → ${addrLink(e.to)} ${label(e.to) ? `<span class="chip">${esc(label(e.to))}</span>` : ""}
+        ${flags.map((f) => `<span class="chip bad">${esc(f)}</span>`).join(" ")}
+        ${stop && stop !== "max_hops_reached" ? `<span class="chip">${esc(stop.replaceAll("_", " "))}</span>` : ""}
+        <div class="small">${(e.tx_hashes || []).map(txLink).join(" ")}${e.tx_hashes_truncated ? " …" : ""}</div></div>
+      <div class="num"><b>${amt(e.total)}</b><div class="small muted">${e.transfer_count} transfer${e.transfer_count > 1 ? "s" : ""} · ${when(e.last_seen)}</div></div></div>`;
+  }).join("")}</div>`).join("");
+  return `<section class="card"><h2>Fund trace <span class="chip">${t.hops} hops · ≥ ${esc(t.min_amount.formatted)} ${esc(t.asset.symbol || "")}</span>
+      ${t.partial ? `<span class="chip warn">partial</span>` : ""}<span class="spacer"></span>
+      <span class="small muted">${t.nodes.length} addresses · ${t.edges.length} edges · ${t.stats.api_calls} API calls</span></h2>
+    ${(t.flagged_nodes || []).length ? `<p class="error">Flagged addresses reached: ${t.flagged_nodes.map((f) => `${addrLink(f.address)} (hop ${f.hop}: ${esc(f.flags.join(", "))})`).join("; ")}</p>` : ""}
+    ${hops || `<p class="muted">No outgoing transfers at or above the minimum.</p>`}
+    ${(t.warnings || []).length ? `<ul class="warn">${t.warnings.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}
+    <p class="small muted">Shows where value was sent, hop by hop; it does not prove specific coins moved along a path.</p>${raw(t)}</section>`;
+}
+
+function renderTxs(x) {
+  const rows = (x.items || []).map((i) => {
+    const cp = i.direction === "in" ? i.from.address : (i.to || {}).address;
+    const spoof = i.initiated_by_wallet === false;
+    const status = !i.transfer_confirmed && i.kind !== "contract_call" ? `<span class="chip warn">${esc(i.status)}</span>` : spoof ? `<span class="chip warn" title="Emitted in a transaction this wallet did not sign (approved spender, relayer or address-poisoning spam)">not signed by wallet</span>` : "";
+    return `<tr><td class="small">${when(i.timestamp)}</td><td>${esc(i.kind.replace("_", " "))}</td>
+      <td><span class="chip">${esc(i.direction)}</span></td><td class="num">${i.kind === "contract_call" ? "—" : amt(i.amount)}</td>
+      <td>${cp ? addrLink(cp) : "—"}</td><td>${txLink(i.tx_hash)}</td><td>${status}</td></tr>`;
+  }).join("");
+  const s = x.summary || {};
+  return `<section class="card"><h2>Recent activity <span class="spacer"></span>
+      <span class="small muted">ETH in ${esc(s.native_in_confirmed_eth)} · out ${esc(s.native_out_confirmed_eth)}${x.has_more ? " · more exists" : ""}</span></h2>
+    <div class="scroll"><table><thead><tr><th>Time</th><th>Kind</th><th>Dir</th><th style="text-align:right">Amount</th><th>Counterparty</th><th>Tx</th><th></th></tr></thead>
+    <tbody>${rows || `<tr><td colspan="7" class="muted">No indexed activity.</td></tr>`}</tbody></table></div>
+    ${(x.warnings || []).length ? `<ul class="warn">${x.warnings.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}${raw(x)}</section>`;
+}
+
+// ---- workflow ----
+const plan = [
+  { id: "risk", label: "Risk report", tool: "risk_report", render: renderRisk },
+  { id: "sanctions", label: "Sanctions", tool: "check_sanctions", render: renderSanctions },
+  { id: "trace", label: "Fund trace", tool: "trace_funds", render: renderTrace },
+  { id: "profile", label: "Profile", tool: "get_address_info", render: renderProfile },
+  { id: "txs", label: "Activity", tool: "get_transactions", render: renderTxs },
+];
+
+async function investigate() {
+  const address = $("#addr").value.trim();
+  if (!/^0[xX][0-9a-fA-F]{40}$/.test(address)) { $("#out").innerHTML = `<div class="card error">That is not an Ethereum address (0x followed by 40 hex characters).</div>`; return; }
+  const min = $("#min").value.trim() || "0.1";
+  const investigation_id = "ui-" + Date.now().toString(36);
+  const args = {
+    risk_report: { address, investigation_id },
+    check_sanctions: { address, investigation_id },
+    trace_funds: { address, investigation_id, hops: +$("#hops").value, min_amount: min },
+    get_address_info: { address, investigation_id },
+    get_transactions: { address, investigation_id, limit: 25, direction: "both" },
+  };
+  $("#go").disabled = true;
+  $("#out").innerHTML = plan.map((p) => `<div id="slot-${p.id}"></div>`).join("");
+  $("#steps").innerHTML = plan.map((p) => `<span class="step" id="step-${p.id}">${p.label}</span>`).join("");
+  let ok = false;
+  for (const p of plan) {
+    const step = $("#step-" + p.id);
+    step.className = "step run"; step.textContent = p.label + " …";
+    try {
+      const res = await call(p.tool, args[p.tool]);
+      $("#slot-" + p.id).innerHTML = p.render(res);
+      step.className = "step done"; step.textContent = "✓ " + p.label; ok = true;
+    } catch (e) {
+      $("#slot-" + p.id).innerHTML = `<section class="card"><h2>${p.label}</h2><p class="error">${esc(e.message)}</p></section>`;
+      step.className = "step err"; step.textContent = "✕ " + p.label;
+      if (/address|checksum|pattern/i.test(e.message)) break; // invalid input: stop early
+    }
+  }
+  if (ok) remember(address);
+  $("#go").disabled = false;
+}
+
+$("#go").onclick = investigate;
+$("#addr").addEventListener("keydown", (e) => { if (e.key === "Enter") investigate(); });
+$("#stop").onclick = async () => {
+  if (!confirm("Stop the local WalletScope server? Close this tab afterwards.")) return;
+  try { await fetch("/api/shutdown", { method: "POST" }); } catch {}
+  $("#status").innerHTML = `<span class="dot bad"></span>Server stopped`;
+  $("#go").disabled = true;
+};
+drawRecent();
+refreshStatus();
+</script>
+</body>
+</html>

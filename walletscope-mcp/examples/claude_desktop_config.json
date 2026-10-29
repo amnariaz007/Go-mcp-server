@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "walletscope": {
+      "command": "/ABSOLUTE/PATH/TO/walletscope-mcp/bin/walletscope",
+      "args": [],
+      "env": {
+        "WALLETSCOPE_LOG_LEVEL": "info"
+      }
+    }
+  }
+}

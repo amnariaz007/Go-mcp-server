@@ -1,6 +1,6 @@
 module github.com/amnariaz007/walletscope-mcp
 
-go 1.27.3
+go 1.26.0
 
 require (
 	github.com/google/jsonschema-go v0.4.3

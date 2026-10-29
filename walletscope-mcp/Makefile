@@ -3,7 +3,7 @@ VERSION  ?= 0.1.0
 LDFLAGS  := -s -w -X github.com/amnariaz007/walletscope-mcp/internal/mcpserver.Version=$(VERSION)
 IMAGE    ?= walletscope-mcp:local
 
-.PHONY: all tidy fmt vet test test-short race build run run-http smoke docker docker-smoke demo clean
+.PHONY: all tidy fmt vet test test-short race build run ui run-http smoke docker docker-smoke demo clean
 
 all: fmt vet test build
 
@@ -31,6 +31,9 @@ build:
 
 run: build
 	./$(BIN)
+
+ui: build
+	./$(BIN) ui
 
 run-http: build
 	WALLETSCOPE_TRANSPORT=http ./$(BIN)

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "walletscope": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "--read-only", "--cap-drop", "ALL",
+               "-e", "WALLETSCOPE_TRANSPORT=stdio",
+               "walletscope-mcp:local", "-transport", "stdio"]
+    }
+  }
+}

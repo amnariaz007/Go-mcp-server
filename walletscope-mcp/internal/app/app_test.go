@@ -418,3 +418,58 @@ func (b bearerRT) RoundTrip(r *http.Request) (*http.Response, error) {
 	r.Header.Set("Authorization", "Bearer "+b.token)
 	return http.DefaultTransport.RoundTrip(r)
 }
+
+func TestWebUI(t *testing.T) {
+	a := startApp(t, nil)
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	h, err := a.UIHandler(ctx, cancel)
+	if err != nil {
+		t.Fatal(err)
+	}
+	srv := httptest.NewServer(h)
+	defer srv.Close()
+
+	resp, err := http.Get(srv.URL + "/")
+	if err != nil || resp.StatusCode != 200 || !strings.Contains(resp.Header.Get("Content-Type"), "text/html") {
+		t.Fatalf("index: %v %v", err, resp)
+	}
+	resp.Body.Close()
+
+	post := func(body string) (int, map[string]any) {
+		resp, err := http.Post(srv.URL+"/api/call", "application/json", strings.NewReader(body))
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer resp.Body.Close()
+		var m map[string]any
+		json.NewDecoder(resp.Body).Decode(&m)
+		return resp.StatusCode, m
+	}
+	code, m := post(`{"tool":"check_sanctions","args":{"address":"` + lazarus + `"}}`)
+	if code != 200 || m["result"].(map[string]any)["status"] != "match" {
+		t.Fatalf("call: %d %v", code, m)
+	}
+	if code, _ := post(`{"tool":"shutdown_everything","args":{}}`); code != 400 {
+		t.Fatalf("unknown tool must be rejected, got %d", code)
+	}
+	if code, m := post(`{"tool":"get_address_info","args":{"address":"0x12"}}`); code != 422 || m["error"] == nil {
+		t.Fatalf("invalid input must surface the tool error: %d %v", code, m)
+	}
+
+	// DNS-rebinding guard: a non-loopback Host header is refused.
+	req, _ := http.NewRequest(http.MethodGet, srv.URL+"/api/status", nil)
+	req.Host = "evil.example"
+	resp, err = http.DefaultClient.Do(req)
+	if err != nil || resp.StatusCode != http.StatusForbidden {
+		t.Fatalf("foreign host: %v %d", err, resp.StatusCode)
+	}
+	resp.Body.Close()
+}
+
+func TestUIRefusesNonLoopback(t *testing.T) {
+	a := startApp(t, nil)
+	if err := a.RunUI(context.Background(), "0.0.0.0:0", false); err == nil {
+		t.Fatal("UI must refuse to bind to a public address")
+	}
+}
