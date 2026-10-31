@@ -13,10 +13,75 @@ and transaction hashes.
 Claude answers by calling WalletScope tools and citing the returned evidence.
 See a [real captured Claude Code session](docs/demo/claude-code-session-2026-10-29.md).
 
+![Go](https://img.shields.io/badge/Go-1.26%2B-00ADD8?logo=go&logoColor=white)
+![MCP](https://img.shields.io/badge/MCP-official%20Go%20SDK-6B4FBB)
+![Docker](https://img.shields.io/badge/Docker-distroless-2496ED?logo=docker&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-offline%20%2B%20race%20detector-success)
+
+---
+
+## What it does
+
+Give WalletScope an Ethereum wallet address and it answers five questions:
+
+| Question | Tool | What you get |
+|---|---|---|
+| **Who or what is this address?** | `get_address_info` | ETH balance, whether it is a person's wallet or a smart contract, ENS name, public labels, when it was first and last active |
+| **What has it been doing?** | `get_transactions` | Recent incoming and outgoing transfers (ETH, internal transfers, ERC-20 tokens) with exact amounts. Failed transactions are clearly marked, and fake "address-poisoning" token events are flagged. |
+| **Where did the money go?** | `trace_funds` | A hop-by-hop map (up to 3 hops) of where funds were sent, with amounts and transaction hashes. Sanctioned addresses and mixers along the way are highlighted. |
+| **Is it sanctioned?** | `check_sanctions` | A check against the official U.S. Treasury OFAC sanctions list: match (with the listed entity's name and program), no match, or inconclusive if the list could not be loaded |
+| **How risky is it, and why?** | `risk_report` | A 0–100 score from five transparent rules (sanctions links, mixer use such as Tornado Cash, suspicious deposit patterns, new wallets moving large sums). Every point is backed by transaction evidence and stated limitations. |
+
+You can use it in three ways:
+
+* **Chat with Claude**: connect it to Claude Code or Claude Desktop and ask in plain English. Claude calls the
+  tools and writes a sourced investigation.
+* **Browser**: run `walletscope ui` (or double-click the macOS launcher), paste an address and press
+  **Investigate**.
+* **API**: run it as an HTTP server (Streamable HTTP MCP) with token authentication, locally or in Docker.
+
+WalletScope never fabricates certainty. Missing data is reported as missing; it is never treated as "clean".
+Scores are indicators requiring review, not legal verdicts.
+
+## Technology
+
+| Area | Technology | Why |
+|---|---|---|
+| Language | **Go 1.26+** (standard library first) | Single static binary, goroutines for concurrent tracing, fast startup when Claude launches it |
+| AI integration | **Model Context Protocol** via the official [`modelcontextprotocol/go-sdk`](https://github.com/modelcontextprotocol/go-sdk) v1.8 | Typed tools with auto-generated JSON Schemas; stdio and Streamable HTTP transports |
+| Blockchain data | **Blockscout REST API v2** (Ethereum mainnet, no API key) | Transactions, internal transfers, ERC-20 transfers, address metadata |
+| Sanctions data | **OFAC SDN list** (official XML from the U.S. Treasury Sanctions List Service) | Streamed with `encoding/xml` and indexed in memory, refreshed daily |
+| Exact money maths | `math/big` | Wei-precise amounts, no floating-point errors |
+| Address validation | EIP-55 checksums via `golang.org/x/crypto/sha3` (Keccak-256) | Rejects mistyped addresses |
+| Reliability | Custom TTL+LRU cache, token-bucket rate limiter, retries with exponential backoff, jitter and `Retry-After` | Respects public API limits; survives transient failures |
+| Concurrency | Goroutines, bounded worker pools, `context` cancellation | Parallel tracing with a hard cap on requests, time and graph size |
+| Observability | `log/slog` structured JSON logs (stderr) | Per-call audit trail: tool, duration, outcome, upstream calls, cache hits |
+| Web UI | A single embedded HTML/CSS/JS page (`go:embed`), no framework, no CDN | Works offline, ships inside the binary |
+| Security | Bearer-token auth, cross-origin protection, DNS-rebinding guard, request size limits | Safe defaults for local and container use |
+| Packaging | **Docker** multi-stage build → `distroless/static` non-root image (~12 MB), Docker Compose | Minimal attack surface, easy deployment |
+| Testing | Go `testing`, `httptest` mock servers, recorded API fixtures, race detector | Full offline test suite: no network or API keys needed |
+| Tooling | Makefile, shell smoke tests, a small SDK-based MCP client (`scripts/mcpcall`) | Reproducible build, test and demo |
+
+### Project layout
+
+```text
+cmd/walletscope/        entry point: stdio, http, ui, healthcheck
+internal/mcpserver/     MCP tool definitions and audit logging
+internal/investigation/ address profile, activity, fund tracing
+internal/risk/          explainable rule engine
+internal/sanctions/     OFAC SDN loader and screening
+internal/blockchain/    Blockscout client, data types, address and amount handling
+internal/app/           wiring, HTTP transport, web UI
+internal/{cache,ratelimit,config,observability}/
+docs/                   architecture, risk model, real demo captures
+testdata/               recorded and labelled synthetic fixtures
+```
+
 ---
 
 ## Contents
 
+[What it does](#what-it-does) · [Technology](#technology) ·
 1. [Problem](#problem) · 2. [Features](#features) · 3. [Architecture](#architecture) ·
 4. [Tools](#tools) · 5. [Risk scoring](#risk-scoring) · 6. [Data sources](#data-sources-and-provenance) ·
 7. [Install & build](#install-and-build) · 8. [Claude Desktop](#claude-desktop) · 9. [Claude Code](#claude-code) ·
@@ -397,4 +462,4 @@ errors are listed at once.
 
 ## License
 
-No license has been chosen yet. Add one (for example MIT or Apache-2.0) before publishing.
+No license has been chosen yet. All rights reserved until one is added.
